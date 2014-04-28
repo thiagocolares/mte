@@ -1,0 +1,18 @@
+<?php
+$auth = Zend_Auth::getInstance()->getStorage()->read();
+if ($auth) {
+    $userName = $auth->nome;
+} else {
+    $userName = "USUÁRIO NÃO AUTENTICADO";
+}
+?>
+
+<h3>Sistema de Gestão da pesquisa do Monitoramento da Rede de Atendimento do Programa Seguro Desemprego</h3>
+
+<br/>
+<center><img src="/images/logo.png"/></center>
+<br/>
+
+<h3>Olá <?php echo $userName; ?>!</h3>
+<br/>
+Acesso os questionários no menu acima.

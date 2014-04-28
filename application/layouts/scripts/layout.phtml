@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <?php
+        $dadosUsuario = Zend_Auth::getInstance()->getIdentity();
+
+        echo $this->headMeta();
+        echo $this->headTitle();
+
+        $this->addHelperPath('ZendX/JQuery/View/Helper', 'ZendX_JQuery_View_Helper');
+        $this->jQuery()->setLocalPath($this->baseUrl("javascript/library/jquery/jquery-1.8.3.min.js"));
+        $this->jQuery()->setUiLocalPath($this->baseUrl("javascript/library/jqueryUi/jquery-ui-1.7.2.custom.min.js"));
+        $this->jQuery()->enable();
+        $this->jQuery()->uiEnable();
+        echo $this->jQuery();
+
+        echo $this->headLink();
+        echo $this->headScript();
+        echo $this->autoJs;
+
+        $auth = Zend_Auth::getInstance()->getStorage()->read();
+        ?>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="">
+
+        <!-- Just for debugging purposes. Don't actually copy this line! -->
+        <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+        <style>
+            body {
+                padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+            }
+        </style>   
+
+    </head>
+    <body role="document">
+
+        <?php
+        if ($auth) {
+            echo $this->render('/common/menu.phtml');
+        } else {
+            echo $this->render('/common/menuOut.phtml');
+        }
+        ?>
+        <div class="container theme-showcase" role="main">
+            <div class="container">
+
+                <?php
+                //if ($auth) {
+                echo $this->layout()->content;
+                //} else {
+                //    echo $this->render('/common/login.phtml');
+                //}
+                ?>
+
+            </div>
+        </div>    
+
+    </body>
+</html>

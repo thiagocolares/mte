@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="fechamento_mes" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT cdbr_supervisor, nome_dds, pontuacao_final, concat(pat.cdbr,' – ',pat.nome) as patrocinador FROM(
+
+SELECT dds.idDds, dds.cdbr as cdbr_supervisor, dds.nome as nome_dds, dds.idPatrocinador id_patrocinador, floor((SUM(pnt.valor) + bon.valor)/600)*600 as pontuacao_final
+      FROM atlantida.dds dds
+      INNER JOIN atlantida.venda vnd ON dds.idDds = vnd.idDds
+      INNER JOIN atlantida.pontuacao pnt ON vnd.idVenda = pnt.idVenda
+      RIGHT JOIN atlantida.bonus bon ON dds.idDds = bon.idDds
+      WHERE DATE_FORMAT(vnd.dataVenda, '%m/%Y') = DATE_FORMAT('2011-06-01', '%m/%Y')
+      AND bon.mes = 06 AND bon.ano = 2011
+      GROUP BY dds.cdbr
+      )
+as interno INNER JOIN atlantida.dds pat ON id_patrocinador = pat.idDds;]]>
+	</queryString>
+	<field name="cdbr_supervisor" class="java.lang.Long"/>
+	<field name="nome_dds" class="java.lang.String"/>
+	<field name="pontuacao_final" class="java.math.BigDecimal"/>
+	<field name="patrocinador" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="102" y="0" width="369" height="72"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Program Files (x86)\\Zend\\Apache2\\htdocs\\atlantida\\library\\Reporting\\relatorio\\logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="137" y="13" width="297" height="34" forecolor="#006666"/>
+				<textElement>
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório Mensal de Pontuação - DDA]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="10" y="9" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CDBR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="110" y="9" width="214" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUPERVISOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="324" y="9" width="110" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PONTUAÇÃO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="434" y="9" width="111" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PATROCINADOR]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="110" y="0" width="214" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nome_dds}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="434" y="0" width="111" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{patrocinador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{cdbr_supervisor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="324" y="0" width="110" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{pontuacao_final}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

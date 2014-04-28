@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+@IMPORT url("styles/ui.accordion.css");
+@IMPORT url("styles/ui.all.css");
+@IMPORT url("styles/ui.base.css");
+@IMPORT url("styles/ui.core.css");
+@IMPORT url("styles/ui.datepicker.css");
+@IMPORT url("styles/ui.dialog.css");
+@IMPORT url("styles/ui.progressbar.css");
+@IMPORT url("styles/ui.resizable.css");
+@IMPORT url("styles/ui.slider.css");
+@IMPORT url("styles/ui.tabs.css");
+@IMPORT url("styles/ui.theme.css");

@@ -1,0 +1,43 @@
+<form id="frmVenda" name="frmVenda">
+<?php
+echo $this->form->getElement('dds');
+echo $this->form->getElement('observacao');
+
+?>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<h2>Cesta de Produtos</h2>
+<br />
+
+<?php
+echo $this->form->getElement('produto');
+echo $this->form->getElement('quantidade');
+echo $this->form->getElement('btnAdicionar');
+?>
+
+<?php 
+echo $this->form->getElement('produtos_venda');
+?>
+<div id="gridContainerProdutos"></div>
+
+<div id="total"></div>
+
+<br/><br/>
+<?php
+
+echo $this->form->getElement('btnSalvar');
+echo $this->form->getElement('btnCancelar');
+
+?>
+
+<?php
+echo $this->form->getElement('idVenda');
+echo $this->form->getElement('idDds');
+echo $this->form->getElement('idProduto');
+?>
+</form>

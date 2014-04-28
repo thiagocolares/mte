@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<parametros>
+	<relatorio nome="teste">
+		<item seq="1">url_logo</item>
+	</relatorio>		
+</parametros>

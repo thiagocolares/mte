@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_vendas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="where" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="soma_produtos" class="java.lang.String"/>
+	<parameter name="soma_comissao" class="java.lang.String"/>
+	<parameter name="soma_valorLiquido" class="java.lang.String"/>
+	<parameter name="soma_frete" class="java.lang.String"/>
+	<parameter name="soma_imposto" class="java.lang.String"/>
+	<parameter name="soma_valorTotal" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT dataVenda, nome, cdbr, valor as produtos, comissao, valorLiquido, frete, imposto, valor + frete + imposto as valorTotal FROM (
+  SELECT v.idVenda, date_format(v.dataVenda, '%d/%m/%Y') as dataVenda, d.nome, d.cdbr,
+        FORMAT(SUM(vp.valor_unitario * vp.quantidade),2) as valor,
+        FORMAT(((SUM(vp.valor_unitario * vp.quantidade)/100)*25),2) as comissao,
+        FORMAT((SUM(vp.valor_unitario * vp.quantidade) - ((SUM(vp.valor_unitario * vp.quantidade)/100)*25)),2) as valorLiquido,
+        IF(SUM(vp.valor_unitario * vp.quantidade) >= 600,'70.00','0') AS frete,
+        IF(SUM(vp.valor_unitario * vp.quantidade) >= 600,'10.00','0') AS imposto
+  FROM atlantida.venda v
+  JOIN atlantida.venda_produto vp ON(v.idVenda = vp.idVenda)
+  JOIN atlantida.dds d ON(v.idDds = d.idDds)
+  GROUP BY vp.idVenda ) vendas $P!{where}]]>
+	</queryString>
+	<field name="dataVenda" class="java.lang.String"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="cdbr" class="java.lang.Long"/>
+	<field name="produtos" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="comissao" class="java.lang.Double"/>
+	<field name="valorLiquido" class="java.lang.Double"/>
+	<field name="frete" class="java.lang.Double"/>
+	<field name="imposto" class="java.lang.Double"/>
+	<field name="valorTotal" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="95" y="0" width="369" height="72"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Program Files (x86)\\Zend\\Apache2\\htdocs\\atlantida\\library\\Reporting\\relatorio\\logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="192" y="1" width="186" height="34" forecolor="#006666"/>
+				<textElement>
+					<font size="15" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Vendas]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="11" y="0" width="25" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nº]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="36" y="0" width="67" height="20"/>
+				<textElement/>
+				<text><![CDATA[Data]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="103" y="0" width="77" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="180" y="0" width="37" height="20"/>
+				<textElement/>
+				<text><![CDATA[CDBR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="217" y="0" width="71" height="20"/>
+				<textElement/>
+				<text><![CDATA[Produtos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="288" y="0" width="56" height="20"/>
+				<textElement/>
+				<text><![CDATA[Comissão]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="0" width="59" height="20"/>
+				<textElement/>
+				<text><![CDATA[Liquido]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="403" y="0" width="42" height="20"/>
+				<textElement/>
+				<text><![CDATA[Frete]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="445" y="0" width="50" height="20"/>
+				<textElement/>
+				<text><![CDATA[Imposto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="495" y="0" width="60" height="20"/>
+				<textElement/>
+				<text><![CDATA[Valor Total]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="44" splitType="Stretch">
+			<textField>
+				<reportElement x="11" y="0" width="25" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="36" y="0" width="67" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{dataVenda}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="103" y="0" width="77" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="180" y="0" width="37" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{cdbr}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="217" y="0" width="71" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{produtos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="288" y="0" width="56" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{comissao}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="344" y="0" width="59" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{valorLiquido}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="403" y="0" width="42" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{frete}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="445" y="0" width="50" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{imposto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00;(-#,##0.00)">
+				<reportElement x="495" y="0" width="60" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Double"><![CDATA[$F{valorTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="217" y="0" width="71" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{soma_produtos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="288" y="0" width="56" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{soma_comissao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="0" width="58" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{soma_valorLiquido}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="403" y="0" width="42" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{soma_frete}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="0" width="50" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{soma_imposto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="495" y="0" width="60" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{soma_valorTotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

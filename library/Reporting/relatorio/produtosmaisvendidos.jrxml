@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="produtosmaisvendidos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="where" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT SUM(vnd_prod.quantidade) as quantidade, REPLACE(prod.descricao, '\\', ''), prod.idProduto FROM atlantida.produto prod
+JOIN atlantida.venda_produto vnd_prod
+ON prod.idProduto = vnd_prod.idProduto
+JOIN atlantida.venda vnd
+ON vnd_prod.idVenda = vnd.idVenda
+$P!{where}
+GROUP BY prod.idProduto
+LIMIT 0,5]]>
+	</queryString>
+	<field name="quantidade" class="java.math.BigDecimal"/>
+	<field name="REPLACE(prod.descricao, &apos;\\&apos;, &apos;&apos;)" class="java.lang.String"/>
+	<field name="idProduto" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<image>
+				<reportElement x="94" y="0" width="369" height="72"/>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Program Files (x86)\\Zend\\Apache2\\htdocs\\atlantida\\library\\Reporting\\relatorio\\logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement x="144" y="0" width="267" height="20"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de produtos mais vendidos]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<summary>
+		<band height="107" splitType="Stretch">
+			<barChart>
+				<chart>
+					<reportElement x="25" y="0" width="514" height="100"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{REPLACE(prod.descricao, '\\', '')}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{REPLACE(prod.descricao, '\\', '')}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{quantidade}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot/>
+					<itemLabel color="#000000" backgroundColor="#FFFFFF"/>
+					<categoryAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat>
+							<labelFont/>
+							<tickLabelFont/>
+						</axisFormat>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+		</band>
+	</summary>
+</jasperReport>

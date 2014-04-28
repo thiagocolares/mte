@@ -1,0 +1,259 @@
+/* grid */
+
+.grid{
+
+    border-collapse: separate;
+
+    margin: 7px 0 7px 0;
+
+    border: 1px solid #98a5fb !important;
+    
+    width: 70%;
+    
+
+}
+
+.grid tbody{
+
+    border-bottom: 1px solid #99CC69 !important;
+
+}
+
+.grid tr{
+
+    height:20px;
+
+    line-height:16px;
+
+    border-top:1px solid #98a5fb;
+
+    border-bottom:none;
+
+    border-left: none;
+
+    border-right: none;
+
+}
+
+.grid thead tr th, .grid tfoot tr td{
+
+    background: #98a5fb url(images/grid.png) repeat-x top !important;
+
+}
+
+ 
+
+.grid th, .grid td{
+
+    font-size: 11px;
+
+    color:#333333;
+
+    padding:4px 10px 4px 10px;
+
+}
+
+.grid tbody tr td{
+
+    background-image: url(images/grid_separator.png);
+
+    background-repeat: no-repeat;
+
+    background-position: right center ;
+
+}
+
+.grid thead tr th{
+
+    font-size: 12px;
+
+    font-weight:  normal !important;
+
+    color: #262a4a;
+
+    border-top: none !important;
+
+    border-bottom: 1px solid #98a5fb !important;
+
+    border-left: none;
+
+    border-right: none;
+
+}
+
+.grid tfoot tr td{
+
+    font-size: 12px;
+
+    font-weight:  normal !important;
+
+    color: #262a4a;
+
+    border-top: 1px solid #98a5fb !important;
+
+    border-bottom: none !important;
+
+    border-left: none;
+
+    border-right: none;
+
+}
+
+.grid tfoot td{
+
+    text-align: center;
+
+}
+
+.grid tfoot td div{
+
+    margin: 0 auto;
+
+    width: 466px;
+
+    height: 25px;
+
+}
+
+.grid tfoot td label.paginator-label{
+
+    cursor: pointer;
+
+    float: left;
+
+    width: 325px;
+
+    display: inline;
+
+}
+
+.grid tfoot td label.paginator-label:hover{
+
+    /*text-decoration: underline !important;*/
+
+}
+
+.grid tfoot td label.paginator-label input{
+
+    display: none;
+
+    width: 50px;
+
+    text-align: center;
+
+}
+
+.grid tbody tr td.last{
+
+    background-image: none;
+
+}
+
+.grid tbody tr.row-even{
+
+    background-color: #EAE9EA;
+
+}
+
+.grid tbody tr.row-odd{
+
+    background-color: #FAF9FA;
+
+}
+
+.grid tbody tr:hover{
+
+    cursor: pointer;
+
+}
+
+.grid tbody tr.clickable:hover{
+
+    border: 1px solid #7282ee;
+
+    background-color: #DCE8ED;
+
+}
+
+ 
+
+.grid tbody tr.clickable.row-even td.column-not-clickable{
+
+    background-color: #EAE9EA !important;
+	cursor: pointer;
+
+}
+
+.grid tbody tr.clickable.row-odd td.column-not-clickable{
+
+    background-color: #FAF9FA !important;
+
+    cursor: pointer;
+
+}
+
+.column-without-header {
+
+    padding: 0 !important;
+
+    /*width: 25px;*/
+
+}
+
+.column-without-header button {
+
+    margin:0 !important;
+
+}
+
+ 
+
+.column-hidden{
+
+    display: none !important;
+
+}
+
+.grid button.row-button{
+
+   
+
+}
+
+.grid button.paginator-button{
+
+    vertical-align: middle;
+
+    float: left;
+
+}
+
+.grid label.paginator-label{
+
+    margin-left: 5px;
+
+    vertical-align: middle;
+
+}
+
+button.grid-button{
+
+    padding: 0 !important;
+
+    margin-left: 5px;
+
+}
+
+button.grid-button span{
+
+    margin: 0 !important;
+
+}
+
+ 
+
+td.column-not-clickable span.ui-icon {
+
+    cursor: pointer;
+
+}

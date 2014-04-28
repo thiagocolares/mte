@@ -1,0 +1,1761 @@
+<?php
+$nsPosto = new Zend_Session_Namespace();
+$dadosPosto = $nsPosto->posto;
+?>
+
+<style>
+
+    .painelDiv {
+        background-color: #FAFAFA;
+        background-repeat: repeat-x;
+        border: 1px solid #D4D4D4;
+        border-radius: 4px;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+        min-height: 40px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+</style>
+
+<div class="jumbotron">
+
+    <div class="bs-example bs-example-tabs">
+
+        <h2>Questionário GRTE - Posto <?php echo $dadosPosto['codigo_posto']; ?></h2>
+
+        <a href="javascript:history.go(-1)" class="btn btn-primary" id="voltarLista">Voltar para a listagem de questionários</a>
+        
+        <div style="display:none;" class="alert alert-success" id="alertaSucesso"></div>
+        <div style="display:none;" class="alert alert-error" id="alertaErro"></div>
+
+        <ul class="nav nav-tabs" id="myTab">
+
+            <li class="active"><a href="#grte-1" data-toggle="tab">Bloco 1</a></li>
+            <li><a href="#grte-2" data-toggle="tab">Bloco 2</a></li>
+            <li><a href="#grte-3" data-toggle="tab">Bloco 3</a></li>
+            <li><a href="#grte-4" data-toggle="tab">Bloco 4</a></li>
+            <li><a href="#grte-5" data-toggle="tab">Bloco 5</a></li>
+            <li><a href="#grte-6" data-toggle="tab">Bloco 6</a></li>
+            <li><a href="#grte-7" data-toggle="tab">Bloco 7</a></li>
+            <li><a href="#grte-8" data-toggle="tab">Bloco 8</a></li>
+            <li><a href="#grte-9" data-toggle="tab">Bloco 9</a></li>
+        </ul>
+
+        <!-- Tab panes -->
+        <div class="tab-content" id="myTabContent">
+
+            <div class="tab-pane fade active in" id="grte-1">
+
+                <form name="bloco1" id="bloco1" class="form-horizontal">  
+
+                    <input type="hidden" name="id_questionario_grte" id="idQuestionarioGrte" value="<?php echo $this->id_questionario_grte; ?>"/>
+                    <input type="hidden" name="codigo_posto" id="codigoPosto" value="<?php echo $dadosPosto['codigo_posto']; ?>"/>
+                    
+                    <fieldset>  
+
+                        <legend>Bloco 1 - Controle</legend> 
+
+                        <div class="row-fluid span12">
+
+                            <div class="control-group span6">  
+                                <label class="control-label" for="1-nome_pesquisador">1. Nome do Pesquisador</label>  
+                                <div class="controls">  
+                                    <input type="text" name="nome_pesquisador" class="input-xlarge" id="1-nome_pesquisador">  
+                                </div>
+                            </div>
+
+                            <div class="control-group span6">  
+                                <label class="control-label" for="2-data_levantamento">2. Data do Levantamento</label>  
+                                <div class="controls">  
+                                    <input type="date" name="data_levantamento" class="input-medium" id="2-data_levantamento">  
+                                </div>  
+                            </div>
+
+
+                            <div class="control-group span6">  
+                                <label class="control-label" for="3-nome_grte">3. Nome da GRTE</label>  
+                                <div class="controls">  
+                                    <input type="text" name="nome_grte" class="input-xlarge" id="3-nome_grte" value="<?php echo $dadosPosto['nome_posto']; ?>">
+                                </div>
+                            </div>
+
+                            <div class="control-group span6">  
+                                <label class="control-label" for="4-codigo_grte">4. Código da GRTE</label>  
+                                <div class="controls">  
+                                    <input type="text" name="codigo_grte" class="input-medium" id="4-codigo_grte" disabled="disabled" value="<?php echo $dadosPosto['codigo_posto']; ?>">  
+                                </div>
+                            </div>
+
+
+                            <div class="control-group span12">  
+                                <label class="control-label" for="5-endereco_grte">5. Endereço da GRTE</label>  
+                                <div class="controls">  
+                                    <input type="text" name="endereco_grte" class="input-xxlarge" id="5-endereco_grte" value="<?php echo $dadosPosto['endereco']; ?>">  
+                                </div>
+                            </div>
+
+                            <div class="control-group span12">
+                                <label class="control-label" for="q6">6. GRTE localizada no endereço registrado?</label>
+                                <div class="controls">
+                                    <label class="radio inline" for="q6-sim">
+                                        <input name="localizado_endereco_registrado" id="q6-sim" value="s" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="q6-nao">
+                                        <input name="localizado_endereco_registrado" id="q6-nao" value="n" type="radio">
+                                        Não
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q6-comentario_endereco_grte">Comentário</label>  
+                                <div class="controls">  
+                                    <textarea class="input-xxlarge" name="comentario_endereco_grte" id="q6-comentario_endereco_grte" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">  
+                                <label class="control-label" for="7-telefone_grte">7. Telefone da GRTE</label>  
+                                <div class="controls">  
+                                    <input type="text" name="telefone_grte" class="input-medium" id="7-telefone_grte" value="<?php echo $dadosPosto['telefone']; ?>">  
+                                </div>
+                            </div>
+
+                            <br/>
+
+                            <div class="control-group span6">  
+                                <label class="control-label" for="8-endereco_grte">8. Cidade</label>  
+                                <div class="controls">  
+                                    <input type="text" name="cidade_grte" class="input-medium" id="8-cidade">  
+                                </div>
+                            </div>
+
+                            <div class="control-group span6">
+                                <label class="control-label" for="9-uf">UF</label>  
+                                <div class="controls">  
+                                    <select name="uf_grte" id="9-uf" class="span4">  
+                                        <option value="0">Selecione</option> 
+                                        <?php
+                                        foreach ($this->listaUf as $value) {
+                                            if ($dadosPosto['codigo_uf'] != $value['codigo_uf']) {
+                                                echo "<option value='{$value['codigo_uf']}'>{$value['sigla_uf']}</option>";
+                                            } else {
+                                                echo "<option selected='selected' value='{$value['codigo_uf']}'>{$value['sigla_uf']}</option>";
+                                            }
+                                        }
+                                        ?>
+                                    </select>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">  
+                                <label class="control-label" for="10-nome_entrevistado">10. Nome do Entrevistado</label>  
+                                <div class="controls">  
+                                    <input type="text" name="nome_entrevistado" class="input-xxlarge" id="10-nome_entrevistado">  
+                                </div>
+                            </div>
+
+                            <div class="control-group span6">  
+                                <label class="control-label" for="11-email_entrevistado">11. Email do Entrevistado</label>  
+                                <div class="controls">  
+                                    <input type="text" name="email_entrevistado" class="input-xlarge" id="11-email_entrevistado">  
+                                </div>
+                            </div>
+
+                            <div class="control-group span6">  
+                                <label class="control-label" for="12-cargo_entrevistado">12. Cargo do Entrevistado</label>  
+                                <div class="controls">  
+                                    <input type="text" name="cargo_entrevistado" class="input-xlarge" id="12-cargo_entrevistado">  
+                                </div>
+                            </div>
+
+                            <div class="control-group span6">  
+                                <label class="control-label" for="13-tempo_cargo_anos">13.1. Tempo no cargo (anos)</label>  
+                                <div class="controls">  
+                                    <input type="text" name="tempo_cargo_ano" class="input-xlarge" id="13-tempo_cargo-ano">  
+                                </div>
+                            </div>
+
+                            <div class="control-group span6">  
+                                <label class="control-label" for="13-tempo_cargo_meses">13.2. Tempo no cargo (meses)</label>  
+                                <div class="controls">  
+                                    <input type="text" name="tempo_cargo_meses" class="input-xlarge" id="13-tempo_cargo_meses">  
+                                </div>
+                            </div>
+
+
+                            <legend>Demais Entrevistados</legend>
+                            <p class="help-block">Caso mais pessoas tenham sido entrevistadas durante a visita (Nome e Email)</p>
+
+                            <div class="span12" id="demaisEntrevistados-1">
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="13-nome_demais_entrevistados_1">Nome do Entrevistado</label>  
+                                    <div class="controls">  
+                                        <input type="text" name="nome_demais_entrevistados_01" class="input-xlarge" id="13-nome_demais_entrevistados_1">  
+                                    </div>
+                                </div>
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="13-email_demais_entrevistados_1">Email do Entrevistado</label>  
+                                    <div class="controls">  
+                                        <input type="text" name="email_demais_entrevistados_01" class="input-xlarge" id="13-email_demais_entrevistados_1"">  
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="span12" id="demaisEntrevistados-2">
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="13-nome_demais_entrevistados_2">Nome do Entrevistado</label>  
+                                    <div class="controls">  
+                                        <input type="text" name="nome_demais_entrevistados_02" class="input-xlarge" id="13-nome_demais_entrevistados_2">  
+                                    </div>
+                                </div>
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="13-email_demais_entrevistados_2">Email do Entrevistado</label>  
+                                    <div class="controls">  
+                                        <input type="text" name="email_demais_entrevistados_02" class="input-xlarge" id="13-email_demais_entrevistados_2">  
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="span12" id="demaisEntrevistados-3">
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="13-nome_demais_entrevistados_3">Nome do Entrevistado</label>  
+                                    <div class="controls">  
+                                        <input type="text" name="nome_demais_entrevistados_03" class="input-xlarge" id="13-nome_demais_entrevistados_3">  
+                                    </div>
+                                </div>
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="13-email_demais_entrevistados_3">Email do Entrevistado</label>  
+                                    <div class="controls">  
+                                        <input type="text" name="email_demais_entrevistados_03" class="input-xlarge" id="13-email_demais_entrevistados_3">  
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="span12" id="demaisEntrevistados-4">
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="13-nome_demais_entrevistados_4">Nome do Entrevistado</label>  
+                                    <div class="controls">  
+                                        <input type="text" name="nome_demais_entrevistados_04" class="input-xlarge" id="13-nome_demais_entrevistados_4">  
+                                    </div>
+                                </div>
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="13-email_demais_entrevistados_4">Email do Entrevistado</label>  
+                                    <div class="controls">  
+                                        <input type="text" name="email_demais_entrevistados_04" class="input-xlarge" id="13-email_demais_entrevistados_4">  
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+                </form>
+
+
+            </div>
+
+            <div class="tab-pane fade in" id="grte-2">
+
+                <form name="bloco2" id="bloco2"  class="form-horizontal">  
+                    <fieldset>  
+
+                        <legend>Bloco 2 - Atividades</legend> 
+
+                        <b>Atividades desenvolvidas nesta GRTE</b>
+
+                        <br/><br/>
+
+                        15. Eu vou ler uma lista de atividades ligadas ao Programa Seguro-Desemprego e gostaria que o(a) senhor(a) me indicasse quais são aquelas desenvolvidas nesta GRTE.<br/>
+                        <i>Marcar todas que houver (perguntar e observar)</i>
+
+                        <br/><br/>
+
+                        <div class="row-fluid">
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q15">CTPS</label>  
+                                <div class="controls">  
+                                    <label class="checkbox">  
+                                        <input name="q15[]" type="checkbox" id="q15-1" value="15-1">  
+                                        Emissão da CTPS - 1a Via  
+                                    </label>
+                                    <label class="checkbox">  
+                                        <input name="q15[]" type="checkbox" id="q15-2" value="15-2">  
+                                        Emissão da CTPS - 2a Via  
+                                    </label>  
+                                </div>  
+                            </div>    
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q15">Seguro-Desemprego</label>  
+                                <div class="controls">  
+                                    <label class="checkbox">  
+                                        <input name="q15[]" type="checkbox" id="q15-3" value="15-3">  
+                                        Inclusão de requerimento do SD on-line  
+                                    </label>  
+                                    <label class="checkbox">  
+                                        <input name="q15[]" type="checkbox" id="q15-4" value="15-4">  
+                                        Inclusão de requerimento do SD off-line  
+                                    </label>  
+                                </div>  
+                            </div>    
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q15">Atividades Complementares</label>  
+                                <div class="controls">  
+                                    <label class="checkbox">  
+                                        <input name="q15[]" type="checkbox" id="q15-5" value="15-5">  
+                                        Orientação Profissional
+                                    </label>  
+                                    <label class="checkbox">  
+                                        <input name="q15[]" type="checkbox" id="q15-6" value="15-6">  
+                                        Atendimento por Psicólogos  
+                                    </label>  
+                                    <label class="checkbox">  
+                                        <input name="q15[]" type="checkbox" id="q15-7" value="15-7">  
+                                        Outras 
+                                    </label>  
+                                </div>  
+                            </div>    
+                            <div class="control-group" id="q15-7-outras-div" style="display:none;">  
+                                <label class="control-label" for="q15-7_outras">Outras: Quais?</label>  
+                                <div class="controls">  
+                                    <textarea name="q15_07_outras_quais" class="input-xxlarge" id="q15-7-outras" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                        </div>
+
+                    </fieldset>
+                </form>
+
+            </div>
+
+            <div class="tab-pane fade in" id="grte-3">
+
+                <form name="bloco3" id="bloco3" class="form-horizontal">  
+                    <fieldset>  
+
+                        <legend>Bloco 3 - Recursos Humanos</legend> 
+
+                        <b>Atividades desenvolvidas nesta GRTE</b>
+
+                        <br/><br/>
+
+                        <div class="row-fluid span12">
+
+                            <div class="control-group span12">
+                                16. O(A) senhor(a) preencheu a tabela com as informações sobre os funcionários da GRTE que trabalham no atendimento do Programa Seguro-Desemprego (Incluindo CTPS)?
+                                <div class="controls">
+                                    <label class="radio inline" for="q16-sim">
+                                        <input name="q16" id="q16-sim" value="s" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="q16-nao">
+                                        <input name="q16" id="q16-nao" value="n" type="radio">
+                                        Não
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group" id="q16-descrever-div" style="display:none;">  
+                                <label class="control-label" for="q16-descrever">Descrever</label>  
+                                <div class="controls">  
+                                    <textarea name="q16_descrever" class="input-xxlarge" id="q16-descrever" rows="3"></textarea>  
+                                </div>
+                            </div>  
+
+                            <div class="control-group span12">
+                                17. O(A) senhor(a) poderia me entregar a tabela? (Caso não tenha preenchido anteriormente, solicitar o preenchimento da tabela do Anexo I)
+                                <div class="controls">
+                                    <label class="radio inline" for="q17-sim">
+                                        <input name="q17" id="q17-sim" value="s" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="q17-nao">
+                                        <input name="q17" id="q17-nao" value="n" type="radio">
+                                        Não
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group" id="q17-descrever-div" style="display:none;">  
+                                <label class="control-label" for="q17-descrever">Descrever</label>  
+                                <div class="controls">  
+                                    <textarea name="q17_descrever" class="input-xxlarge" id="q17-descrever" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group">
+                                <h3>Anexo I</h3>
+                                <a class="btn btn-primary" id="preencherAnexo1">Novo Registro</a>
+
+                                <div id="camposAnexo1" style="display:none;">
+
+                                    <input type="hidden" name="id_questionario_grte_anx01" id="id_questionario_grte_anx01">
+                                    
+                                    <div class="control-group span6">
+                                        <label class="control-label" for="anx1-1">Nome</label>  
+                                        <div class="controls">  
+                                            <input name="nome" type="text" class="input-medium" id="anx1-1">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span12">
+                                        <label class="control-label" for="q26">Selecione:</label>  
+                                        <div class="controls">  
+                                            <label class="checkbox">  
+                                                <input name="area_sd" type="checkbox" id="anx1-2" value="s">  
+                                                SD
+                                            </label>
+                                            <label class="checkbox">  
+                                                <input name="area_ctps" type="checkbox" id="anx1-3" value="s">  
+                                                CTPS
+                                            </label>  
+                                            <label class="checkbox">  
+                                                <input name="area_capt_ativa" type="checkbox" id="anx1-4" value="s">  
+                                                Capt. Ativa
+                                            </label> 
+                                            <label class="checkbox">  
+                                                <input name="area_rec_adm" type="checkbox" id="anx1-5" value="s">  
+                                                Rec. Adm.
+                                            </label>  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">
+                                        <label class="control-label" for="anx1-6">Idade</label>  
+                                        <div class="controls">  
+                                            <input name="idade" type="text" class="input-medium" id="anx1-6">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">
+                                        <label class="control-label" for="anx1-7">Escolaridade</label>  
+                                        <div class="controls">  
+                                            <input name="escolaridade" type="text" class="input-medium" id="anx1-7">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">                                    
+                                        <label class="control-label" for="anx1-8">Regime de Contrato</label>  
+                                        <div class="controls">  
+                                            <input name="regime_contratacao" type="text" class="input-medium" id="anx1-8">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">
+                                        <label class="control-label" for="anx1-9">Tempo de Trabalho</label>  
+                                        <div class="controls">  
+                                            <input name="tempo_trabalho" type="text" class="input-medium" id="anx1-9">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">
+                                        <label class="control-label" for="anx1-10">Curso Curta Duração</label>  
+                                        <div class="controls">  
+                                            <input name="curso_curta_duracao" type="text" class="input-medium" id="anx1-10">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">
+                                        <label class="control-label" for="anx1-1">Curso Longa Duração</label>  
+                                        <div class="controls">  
+                                            <input name="curso_longa_duracao" type="text" class="input-medium" id="anx1-11">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span12">
+                                        <a class="btn btn-primary" id="salvarAnexo1">Salvar</a>
+                                        <a class="btn btn-primary" id="desistirAnexo1">Desistir</a>
+                                    </div>
+
+                                </div>
+
+                                <div class="control-group span12">
+                                    <div id="gridContainerAnexo1"></div>
+                                </div>
+
+                            </div>
+
+                            <div class="control-group span12">
+
+                                18. Quantos funcionários trabalham nesta GRTE nas seguintes áreas? (Ligados à área de atendimento do Programa Seguro-Desemprego, incluindo CTPS)
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="q18-0">18.0 - Total</label>  
+                                    <div class="controls">  
+                                        <input name="q18_00" type="text" class="input-medium" id="q18-1">  
+                                    </div>
+                                </div>
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="q18-1">18.1 - Recepção</label>  
+                                    <div class="controls">  
+                                        <input name="q18_01_recepcao" type="text" class="input-medium" id="q18-1">  
+                                    </div>
+                                </div>
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="q18-2">18.2 - Segurança</label>  
+                                    <div class="controls">  
+                                        <input name="q18_02_seguranca" type="text" class="input-medium" id="q18-2">  
+                                    </div>
+                                </div>
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="q18-3">18.3 - Limpeza</label>  
+                                    <div class="controls">  
+                                        <input name="q18_03_limpeza" type="text" class="input-medium" id="q18-3">  
+                                    </div>
+                                </div>
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="q18-4">18.4 - Manutenção</label>  
+                                    <div class="controls">  
+                                        <input name="q18_04_manutencao" type="text" class="input-medium" id="q18-4">  
+                                    </div>
+                                </div>
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="q18-4">18.5 - Outros</label>  
+                                    <div class="controls">  
+                                        <input name="q18_05_outras" type="text" class="input-medium" id="q18-5">  
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="control-group span12">
+                                19. Os funcionários desta GRTE trabalham uniformizados?
+                                <div class="controls">
+                                    <label class="radio inline span12" for="q19-1">
+                                        <input name="q19" id="q19-1" value="1" type="radio">
+                                        19.1 - Sim, todos
+                                    </label>
+                                    <label class="radio inline span12" for="q19-2">
+                                        <input name="q19" id="q19-2" value="2" type="radio">
+                                        19.2 - Sim, apenas os funcionários do atendimento 
+                                    </label>
+                                    <label class="radio inline span12" for="q19-3">
+                                        <input name="q19" id="q19-3" value="3" type="radio">
+                                        19.3 - Sim , mas nem todos os funcionários do atendimento
+                                    </label>
+                                    <label class="radio inline span12" for="q19-4">
+                                        <input name="q19" id="q19-4" value="4" type="radio">
+                                        19.4 - Não, nenhum
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group span12">
+                                20. Existem materiais (manuais, guias, normas, etc.) que orientem os funcionários para um melhor atendimento de trabalhadores? (Materiais que informem sobre as ações do Programa Seguro-Desemprego, sobre a integração de seus componentes, sobre a realidade do mercado de trabalho ou sobre como realizar um bom atendimento) Como são estes materiais e de que forma eles são passados aos funcionários?
+                                <div class="controls">
+                                    <label class="radio inline" for="q20-sim">
+                                        <input name="q20" id="q20-sim" value="s" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="q20-nao">
+                                        <input name="q20" id="q20-nao" value="n" type="radio">
+                                        Não
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group" id="q20-descrever-div" style="display:none;">  
+                                <label class="control-label" for="q20-descrever">Descrever</label>  
+                                <div class="controls">  
+                                    <textarea name="q20_descrever" class="input-xxlarge" id="q20-descrever" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+                                21. Existe alguma forma de incentivo para melhorar o desempenho dos funcionários da GRTE? (Ligados à área de atendimento do Programa Seguro-Desemprego, incluindo CTPS) (Se sim, descrever os incentivos)
+                                <div class="controls">
+                                    <label class="radio inline" for="q21-sim">
+                                        <input name="q21" id="q21-sim" value="s" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="q21-nao">
+                                        <input name="q21" id="q21-nao" value="n" type="radio">
+                                        Não
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group" id="q21-descrever-div" style="display:none;">  
+                                <label class="control-label" for="q21-descrever">Descrever</label>  
+                                <div class="controls">  
+                                    <textarea name="q21_descrever" class="input-xxlarge" id="q21-descrever" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+
+                                22. De acordo com a sua percepção, quais são os principais objetivos do atendimento do Programa Seguro-Desemprego? 
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="q22-1">22.1</label>  
+                                    <div class="controls">  
+                                        <input name="q22_01" type="text" class="input-xlarge" id="q22-1">  
+                                    </div>
+                                </div>
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="q22-2">22.2</label>  
+                                    <div class="controls">  
+                                        <input name="q22_02" type="text" class="input-xlarge" id="q22-2">  
+                                    </div>
+                                </div>
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="q22-3">22.3</label>  
+                                    <div class="controls">  
+                                        <input name="q22_03" type="text" class="input-xlarge" id="q22-3">  
+                                    </div>
+                                </div>
+
+                                <div class="control-group span6">  
+                                    <label class="control-label" for="q22-4">22.4</label>  
+                                    <div class="controls">  
+                                        <input name="q22_04" type="text" class="input-xlarge" id="q22-4">  
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="control-group span12">  
+                                23. De que forma as metas de desempenho são comunicadas aos funcionários desta GRTE? 
+                                <div class="controls">  
+                                    <textarea name="q23" class="input-xxlarge" id="q23" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+                                24. O(A) senhor(a) preencheu a tabela com as informações sobre as metas de desempenho da GRTE?
+                                <div class="controls">
+                                    <label class="radio inline" for="q24-sim">
+                                        <input name="q24" id="q24-sim" value="s" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="q24-nao">
+                                        <input name="q24" id="q24-nao" value="n" type="radio">
+                                        Não
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group" id="q24-descrever-div" style="display:none;">  
+                                <label class="control-label" for="q24-descrever">Descrever</label>  
+                                <div class="controls">  
+                                    <textarea name="q24_descrever" class="input-xxlarge" id="q24-descrever" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+                                25. O(A) senhor(a) poderia me entregar a tabela? (Caso não tenha preenchido anteriormente, solicitar o preenchimento da tabela do Anexo II). Solicitar ao entrevistado que entregue a tabela com as informações sobre as metas de desempenho da GRTE
+                                <div class="controls">
+                                    <label class="radio inline" for="q25-sim">
+                                        <input name="q25" id="q25-sim" value="s" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="q25-nao">
+                                        <input name="q25" id="q25-nao" value="n" type="radio">
+                                        Não
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group" id="q25-descrever-div" style="display:none;">  
+                                <label class="control-label" for="q25-descrever">Descrever</label>  
+                                <div class="controls">  
+                                    <textarea name="q25_descrever" class="input-xxlarge" id="q25-descrever" rows="3"></textarea>  
+                                </div>  
+                            </div>
+
+                            <!-- Anexo II -->
+
+                            <div class="control-group">
+                                <h3>Anexo II</h3>
+                                <a class="btn btn-primary" id="preencherAnexo2">Novo Registro</a>
+
+                                <div id="camposAnexo2" style="display:none;">
+
+                                    <input type="hidden" name="id_questionario_grte_anx02" id="id_questionario_grte_anx02">
+                                    
+                                    <div class="control-group span6">
+                                        <label class="control-label" for="anx2-1">GRTE</label>  
+                                        <div class="controls">  
+                                            <input name="codigo_grte" type="text" class="input-medium" id="anx2-1" value="<?php echo $dadosPosto['codigo_posto']; ?>" disabled="disabled">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span12">
+                                        <label class="control-label" for="anx2-2">Meta</label>  
+                                        <div class="controls">  
+                                            <select name="codigo_meta" id="anx2-2" class="span8">  
+                                                <option value="0">Selecione</option> 
+                                                <option value="1">24.01 Requerentes totais de serviços do Seguro-Desemprego</option>  
+                                                <option value="2">24.02 Requerentes do benefício do Seguro-Desemprego</option>  
+                                                <option value="3">24.03 Requerentes do Seguro-Desemprego encaminhados para cursos de qualificação</option>  
+                                                <option value="4">24.04 Requerentes do Seguro-Desemprego encaminhados para vaga de trabalho</option>  
+                                                <option value="5">24.05 Requerentes do Seguro-Desemprego colocados por meio do Sine</option>
+                                                <option value="6">24.06 Trabalhadores inscritos no Sine</option> 
+                                                <option value="7">24.07 Trabalhadores inscritos no Sine e encaminhados para cursos de qualificação</option> 
+                                                <option value="8">24.08 Trabalhadores colocados</option>
+                                                <option value="9">24.09 Vagas captadas</option> 
+                                                <option value="10">24.10 Encaminhados</option>
+                                                <option value="11">24.11 Quantidade média de atendimentos de serviços de CTPS realizados por dia</option> 
+                                                <option value="12">24.12 Quantidade de CTPS solicitadas</option>
+                                                <option value="13">24.13 Quantidade de Recursos Administrativos Recebidos</option>
+                                                <option value="14">24.14 Quantidade de Recursos Administrativos Deferidos</option> 
+                                                <option value="15">24.15 Quantidade de Recursos Administrativos Indeferidos</option> 
+                                                <option value="16">24.16 Outro</option> 
+                                            </select>  
+                                        </div>  
+                                    </div>  
+
+                                    <div class="control-group span12">
+                                        <label class="control-label" for="anx2-3-sim">Utiliza</label> 
+                                        <div class="controls">
+                                            <label class="radio inline" for="anx2-3-sim">
+                                                <input name="anx2-3" id="anx2-3-sim" value="s" type="radio">
+                                                Sim
+                                            </label>
+                                            <label class="radio inline" for="anx2-3-nao">
+                                                <input name="anx2-3" id="anx2-3-nao" value="n" type="radio">
+                                                Não
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">
+                                        <label class="control-label" for="anx2-3">Prevista 1</label>  
+                                        <div class="controls">  
+                                            <input name="prevista_1" type="text" class="input-medium" id="anx2-3">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">                                    
+                                        <label class="control-label" for="anx2-4">Atingida 1</label>  
+                                        <div class="controls">  
+                                            <input name="atingida_1" type="text" class="input-medium" id="anx2-4">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">
+                                        <label class="control-label" for="anx2-5">Prevista 2</label>  
+                                        <div class="controls">  
+                                            <input name="prevista_2" type="text" class="input-medium" id="anx2-5">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">
+                                        <label class="control-label" for="anx2-6">Atingida 2</label>  
+                                        <div class="controls">  
+                                            <input name="atingida_2" type="text" class="input-medium" id="anx2-6">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">
+                                        <label class="control-label" for="anx2-7">Prevista 3</label>  
+                                        <div class="controls">  
+                                            <input name="prevista_3" type="text" class="input-medium" id="anx2-7">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">
+                                        <label class="control-label" for="anx2-8">Atingida 3</label>  
+                                        <div class="controls">  
+                                            <input name="atingida_3" type="text" class="input-medium" id="anx2-8">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">
+                                        <label class="control-label" for="anx2-9">Meta Anual Prevista</label>  
+                                        <div class="controls">  
+                                            <input name="meta_anual_prevista" type="text" class="input-medium" id="anx2-9">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">
+                                        <label class="control-label" for="anx2-10">Meta Anual Atingida</label>  
+                                        <div class="controls">  
+                                            <input name="meta_anual_atingida" type="text" class="input-medium" id="anx2-10">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span12">
+                                        <a class="btn btn-primary" id="salvarAnexo2">Salvar</a>
+                                        <a class="btn btn-primary" id="desistirAnexo2">Desistir</a>
+                                    </div>
+
+                                </div>
+
+                                <div class="control-group span12">
+                                    <div id="gridContainerAnexo2"></div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </fieldset>
+                </form>
+
+            </div>
+
+            <div class="tab-pane fade in" id="grte-4">
+
+                <form name="bloco4" id="bloco4"  class="form-horizontal">  
+                    <fieldset>  
+
+                        <legend>Bloco 4 - Gestão das Atividades da GRTE</legend> 
+
+                        <div class="row-fluid">
+
+                            26. Eu vou ler uma lista de adaptações para lidar com públicos especiais (jovens, portadores de necessidades especiais, idosos etc) e gostaria que o(a) senhor(a) me indicasse quais esta GRTE possui? (Perguntar e observar).
+
+                            <br/><br/>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q26">Adaptações</label>  
+                                <div class="controls">  
+                                    <label class="checkbox">  
+                                        <input name="q26_01_guiche_preferencial" type="checkbox" id="q26-1" value="1">  
+                                        26.1. Guichê preferencial 
+                                    </label>
+                                    <label class="checkbox">  
+                                        <input name="q26_02_rampa_acesso" type="checkbox" id="q26-2" value="1">  
+                                        26.2. Rampa de acesso para cadeirantes
+                                    </label>  
+                                    <label class="checkbox">  
+                                        <input name="q26_03_banheiro_adaptado" type="checkbox" id="q26-3" value="1">  
+                                        26.3. Banheiro adaptado para cadeirantes
+                                    </label> 
+                                    <label class="checkbox">  
+                                        <input name="q26_04_funcionario_treinado_libras" type="checkbox" id="q26-4" value="1">  
+                                        26.4. Funcionário treinado para atendimento em libras (linguagem de sinais)
+                                    </label>  
+                                    <label class="checkbox">  
+                                        <input name="q26_05_funcionario_treinado_primeiro_emprego" type="checkbox" id="q26-5" value="1">  
+                                        26.5. Guichê específico ou funcionário treinado para atender jovens em busca do primeiro emprego
+                                    </label>                                      
+                                    <label class="checkbox">  
+                                        <input name="q26_06_outra" type="checkbox" id="q26-6" value="1">  
+                                        26.6. Outra
+                                    </label>  
+                                </div>  
+
+                                <div class="control-group" id="q26-outras-div" style="display:none;">  
+                                    <label class="control-label" for="q26-outras">Qual?</label>  
+                                    <div class="controls">  
+                                        <textarea name="q26_06_qual" class="input-xxlarge" id="q26-outras" rows="3"></textarea>  
+                                    </div>  
+                                </div>  
+
+                                <div class="control-group">  
+                                    <label class="control-label" for="textarea">Observações</label>  
+                                    <div class="controls">  
+                                        <textarea name="q26_observacao" class="input-xxlarge" id="textarea" rows="3"></textarea>  
+                                    </div>  
+                                </div>  
+
+                                <div class="control-group">  
+                                    <label class="control-label" for="q27">27. Qual o tempo médio de espera para atendimento nesta GRTE?</label>  
+                                    <div class="controls">  
+                                        <input name="q27_hora_minutos" type="text" class="input-medium" id="q27">  
+                                    </div>  
+                                </div> 
+
+                                <div class="control-group">  
+                                    <label class="control-label" for="textarea">Observações</label>  
+                                    <div class="controls">  
+                                        <textarea name="q27_observacao" class="input-xxlarge" id="textarea" rows="3"></textarea>  
+                                    </div>  
+                                </div>  
+
+                                <div class="control-group span12">
+                                    28. Quando um trabalhador solicita o benefício do Seguro-Desemprego, ele pode ter o seu pedido negado (por não preencher os requisitos ou por não apresentar os documentos necessários, por exemplo). Quando isso acontece, este trabalhador tem o direito de apresentar um recurso administrativo solicitando que esta decisão seja revista. Existe alguma rotina ou ação adotada pelos atendentes desta GRTE para diminuir estes recursos administrativos? Se sim, descrever. (perguntar e solicitar documentos sobre as ações ou rotinas)
+                                    <div class="controls">
+                                        <label class="radio inline" for="q28-sim">
+                                            <input name="q28" id="q28-sim" value="s" type="radio">
+                                            Sim
+                                        </label>
+                                        <label class="radio inline" for="q28-nao">
+                                            <input name="q28" id="q28-nao" value="n" type="radio">
+                                            Não
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="control-group" id="q28-descrever-div" style="display:none;">  
+                                    <label class="control-label" for="q28-descrever">Descrever</label>  
+                                    <div class="controls">  
+                                        <textarea name="q28_descrever" class="input-xxlarge" id="q28-descrever" rows="3"></textarea>  
+                                    </div>  
+                                </div>  
+
+                            </div>    
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="tab-pane fade in" id="grte-5">
+
+                <form name="bloco5" id="bloco5"  class="form-horizontal">  
+                    <fieldset>  
+
+                        <legend>Bloco 5 - Sistema de Informação e Equipamentos da GRTE</legend> 
+
+                        <div class="row-fluid">
+
+                            29. Eu vou ler uma lista de sistemas de informação e gostaria que o(a) senhor(a) me indicasse quais destes sistemas esta GRTE utiliza. (observar e perguntar lendo as alternativas e assinalar todas que houver)
+
+                            <br/><br/>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q29">Adaptações</label>  
+                                <div class="controls">  
+                                    <label class="checkbox">  
+                                        <input name="q29_01_sigae_mae" type="checkbox" id="q29-1" value="1">  
+                                        29.1. SIGAE Mãee
+                                    </label>
+                                    <label class="checkbox">  
+                                        <input name="q29_02_sigae_web" type="checkbox" id="q29-2" value="1">  
+                                        29.2. SIGAE Web
+                                    </label>  
+                                    <label class="checkbox">  
+                                        <input name="q29_03_portal_mais_emprego" type="checkbox" id="q29-3" value="1">  
+                                        29.4. Portal Mais Emprego
+                                    </label> 
+                                    <label class="checkbox">  
+                                        <input name="q29_04_sistema_proprio" type="checkbox" id="2q9-4" value="1">  
+                                        29.4. Sistema próprio
+                                    </label>  
+                                    <label class="checkbox">  
+                                        <input name="q29_05_outro" type="checkbox" id="q29-5" value="1">  
+                                        29.5. Outro
+                                    </label>                                      
+                                </div>  
+
+                                <div class="control-group" id="q29-outro-div" style="display:none;">  
+                                    <label class="control-label" for="q29-outro">Qual?</label>  
+                                    <div class="controls">  
+                                        <textarea name="q29_05_quais" class="input-xxlarge" id="q29-outro" rows="3"></textarea>  
+                                    </div>  
+                                </div>  
+
+                                <div class="control-group span12">
+                                    30. Os equipamentos da GRTE são, de uma forma geral, adequados ao bom atendimento? (computadores, móveis, material de escritório, ventiladores, ar-condicionado, etc)(Se a resposta for "não" ou "em parte", descrever os motivos da resposta)
+                                    <div class="controls">
+                                        <label class="radio inline" for="q30-sim">
+                                            <input name="q30" id="q30-sim" value="1" type="radio">
+                                            Sim
+                                        </label>
+                                        <label class="radio inline" for="q30-em-parte">
+                                            <input name="q30" id="q30-em-parte" value="2" type="radio">
+                                            Em parte
+                                        </label>
+                                        <label class="radio inline" for="q30-nao">
+                                            <input name="q30" id="q30-nao" value="3" type="radio">
+                                            Não
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="control-group" id="q30-descrever-div" style="display:none;">  
+                                    <label class="control-label" for="q30-descrever">Descrever</label>  
+                                    <div class="controls">  
+                                        <textarea name="q30_descrever" class="input-xxlarge" id="q30-descrever" rows="3"></textarea>  
+                                    </div>  
+                                </div>  
+
+                                <div class="control-group span12">
+                                    31. Os equipamentos da GRTE são em quantidade suficiente para o bom atendimento? (computadores, móveis, material de escritório, ventiladores, ar-condicionado, etc) (Se a resposta for "não" ou "em parte", descrever os motivos da resposta)   
+                                    <div class="controls">
+                                        <label class="radio inline" for="q31-sim">
+                                            <input name="q31" id="q31-sim" value="1" type="radio">
+                                            Sim
+                                        </label>
+                                        <label class="radio inline" for="q31-em-parte">
+                                            <input name="q31" id="q31-em-parte" value="2" type="radio">
+                                            Em parte
+                                        </label>
+                                        <label class="radio inline" for="q31-nao">
+                                            <input name="q31" id="q31-nao" value="3" type="radio">
+                                            Não
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="control-group" id="q31-descrever-div" style="display:none;">  
+                                    <label class="control-label" for="q31-descrever">Descrever</label>  
+                                    <div class="controls">  
+                                        <textarea name="q31_descrever" class="input-xxlarge" id="q31-descrever" rows="3"></textarea>  
+                                    </div>  
+                                </div>  
+
+                                <div class="control-group span12">
+                                    32. Os equipamentos da GRTE estão em boas condições de uso, manutenção e segurança? (computadores, móveis, material de escritório, ventiladores, ar-condicionado, etc) (Se a resposta for "não" ou "em parte", descrever os motivos da resposta)
+                                    <div class="controls">
+                                        <label class="radio inline" for="q32-sim">
+                                            <input name="q32" id="q32-sim" value="1" type="radio">
+                                            Sim
+                                        </label>
+                                        <label class="radio inline" for="q32-em-parte">
+                                            <input name="q32" id="q32-em-parte" value="2" type="radio">
+                                            Em parte
+                                        </label>
+                                        <label class="radio inline" for="q32-nao">
+                                            <input name="q32" id="q32-nao" value="3" type="radio">
+                                            Não
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="control-group" id="q32-descrever-div" style="display:none;">  
+                                    <label class="control-label" for="q32-descrever">Descrever</label>  
+                                    <div class="controls">  
+                                        <textarea name="q32_descrever" class="input-xxlarge" id="q32-descrever" rows="3"></textarea>  
+                                    </div>  
+                                </div>  
+
+                                <div class="control-group span12">
+
+                                    33. Eu vou ler uma lista de equipamentos e gostaria que o(a) senhor(a) me indicasse quais destes equipamentos esta GRTE possui, assim como a quantidade de cada um.
+
+                                    <div class="control-group span6">  
+                                        <label class="control-label" for="q33-1">33.1 - Computadores</label>  
+                                        <div class="controls">  
+                                            <input name="q33_01" type="text" class="input-medium" id="q33-1">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">  
+                                        <label class="control-label" for="q33-2">33.2 - Computadores conectados à internet</label>  
+                                        <div class="controls">  
+                                            <input name="q33_02" type="text" class="input-medium" id="q33-2">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">  
+                                        <label class="control-label" for="q33-3">33.3 - Computadores destinados ao atendimento</label>  
+                                        <div class="controls">  
+                                            <input name="q33_03" type="text" class="input-medium" id="q33-3">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">  
+                                        <label class="control-label" for="q33-4">33.4 - Linhas telefônicas</label>  
+                                        <div class="controls">  
+                                            <input name="q33_04" type="text" class="input-medium" id="q33-4">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">  
+                                        <label class="control-label" for="q33-5">33.5 - Veículos</label>  
+                                        <div class="controls">  
+                                            <input name="q33_05" type="text" class="input-medium" id="q33-5">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">  
+                                        <label class="control-label" for="q33-6">33.6 - Ar-condicionado geral</label>  
+                                        <div class="controls">  
+                                            <input name="q33_06" type="text" class="input-medium" id="q33-6">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">  
+                                        <label class="control-label" for="q33-7">33.7 - Aparelhos de ar-condicionado</label>  
+                                        <div class="controls">  
+                                            <input name="q33_07" type="text" class="input-medium" id="q33-7">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span12">  
+                                        <label class="control-label" for="q33-8">33.8 - Ventiladores</label>  
+                                        <div class="controls">  
+                                            <input name="q33_08" type="text" class="input-medium" id="q33-8">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">  
+                                        <label class="control-label" for="q33-9">33.9 - Outro. Qual?</label>  
+                                        <div class="controls">  
+                                            <input name="q33_09_outro_01" type="text" class="input-medium" id="q33-9">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">  
+                                        <label class="control-label" for="q33-9-quantidade">33.9 - Quantidade</label>  
+                                        <div class="controls">  
+                                            <input name="q33_09_qtd_outro_01" type="text" class="input-medium" id="q33-9qtd">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">  
+                                        <label class="control-label" for="q33-10">33.10 - Outro. Qual?</label>  
+                                        <div class="controls">  
+                                            <input name="q33_10_outro_02" type="text" class="input-medium" id="q33-10">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">  
+                                        <label class="control-label" for="q33-10-quantidade">33.10 - Quantidade</label>  
+                                        <div class="controls">  
+                                            <input name="q33_10_qtd_outro_02" type="text" class="input-medium" id="q33-10qtd">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">  
+                                        <label class="control-label" for="q33-11">33.11 - Outro. Qual?</label>  
+                                        <div class="controls">  
+                                            <input name="q33_11_outro_03" type="text" class="input-medium" id="q33-10">  
+                                        </div>
+                                    </div>
+
+                                    <div class="control-group span6">  
+                                        <label class="control-label" for="q33-11-quantidade">33.11 - Quantidade</label>  
+                                        <div class="controls">  
+                                            <input name="q33_11_qtd_outro_03" type="text" class="input-medium" id="q33-11qtd">  
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>    
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="tab-pane fade in" id="grte-6">
+
+                <form name="bloco6" id="bloco6"  class="form-horizontal">  
+                    <fieldset>  
+
+                        <legend>Bloco 6 - Equipe de atendimento</legend> 
+
+                        <div class="row-fluid">
+
+                            <div class="control-group span12">
+                                34. A equipe alocada na GRTE é adequada ao bom atendimento, com relação ao número de pessoas? (Se a resposta for "não" ou "em parte", descrever os motivos da resposta)
+                                <div class="controls">
+                                    <label class="radio inline" for="q34-sim">
+                                        <input name="q34" id="q34-sim" value="1" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="q34-em-parte">
+                                        <input name="q34" id="q34-em-parte" value="2" type="radio">
+                                        Em parte
+                                    </label>
+                                    <label class="radio inline" for="q34-nao">
+                                        <input name="q34" id="q34-nao" value="3" type="radio">
+                                        Não
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group" id="q34-descrever-div" style="display:none;">  
+                                <label class="control-label" for="q34-descrever">Descrever</label>  
+                                <div class="controls">  
+                                    <textarea name="q34_descrever" class="input-xxlarge" id="q34-descrever" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+                                35. A equipe alocada na GRTE é adequada ao bom atendimento, com relação ao perfil dos profissionais? (São pessoas com habilidade para exercer as funções de atendimento?) (Se a resposta for "não" ou "em parte", descrever os motivos da resposta)
+                                <div class="controls">
+                                    <label class="radio inline" for="q35-sim">
+                                        <input name="q35" id="q35-sim" value="1" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="q35-em-parte">
+                                        <input name="q35" id="q35-em-parte" value="2" type="radio">
+                                        Em parte
+                                    </label>
+                                    <label class="radio inline" for="q35-nao">
+                                        <input name="q35" id="q35-nao" value="3" type="radio">
+                                        Não
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group" id="q35-descrever-div" style="display:none;">  
+                                <label class="control-label" for="q35-descrever">Descrever</label>  
+                                <div class="controls">  
+                                    <textarea name="q35_descrever" class="input-xxlarge" id="q35-descrever" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                        </div>    
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="tab-pane fade in" id="grte-7">
+
+                <form name="bloco7" id="bloco7"  class="form-horizontal">  
+                    <fieldset>  
+
+                        <legend>Bloco 7 - Portal Mais Emprego</legend> 
+
+                        <div class="row-fluid">
+
+                            <div class="control-group span12">
+                                36.O(A) senhor(a) conhece o Portal Mais Emprego do Ministério do Trabalho? (caso o entrevistado responda "não", concluir a entrevista agradecendo o apoio)
+                                <div class="controls">
+                                    <label class="radio inline" for="q36-sim">
+                                        <input name="q36" id="q36" value="s" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="q36-nao">
+                                        <input name="q36" id="q36" value="n" type="radio">
+                                        Não
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group" id="q37-div">  
+                                <label class="control-label" for="q37">37. Quais são os pontos positivos encontrados na utilização do Portal Mais Emprego nesta GRTE?</label>  
+                                <div class="controls">
+                                    <textarea name="q37" class="input-xxlarge" id="q37" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group" id="q38-div">  
+                                <label class="control-label" for="q38">38. Quais são os pontos negativos encontrados na utilização do Portal Mais Emprego nesta GRTE?</label>  
+                                <div class="controls">  
+                                    <textarea name="q38" class="input-xxlarge" id="q38" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group" id="q39-div">  
+                                <label class="control-label" for="q39">39. O Portal Mais Emprego tem contribuído para que se tenha maior eficiência e eficácia no atendimento ao Programa Seguro-Desemprego?</label>  
+                                <div class="controls">  
+                                    <textarea name="q39" class="input-xxlarge" id="q39" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+
+                        </div>    
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="tab-pane fade in" id="grte-8">
+
+                <form  name="bloco8" id="bloco8" class="form-horizontal">  
+                    <fieldset>  
+
+                        <legend>Bloco 8 - Instalação do Posto</legend> 
+
+                        <div class="row-fluid">
+
+                            <div class="control-group span12">
+                                40. Qual a condiçãoo do imóvel onde a GRTE está localizada?
+                                <div class="controls">
+                                    <label class="radio inline" for="radio-0">
+                                        <input name="q40" id="radios-0" value="1" type="radio">
+                                        Alugado
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q40" id="radios-1" value="2" type="radio">
+                                        Próprio
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q40" id="radios-1" value="3" type="radio">
+                                        Cedido
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="textarea">Observações</label>  
+                                <div class="controls">  
+                                    <textarea name="q40_observacao" class="input-xxlarge" id="textarea" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q41">41. Qual o tamanho do imóvel onde a GRTE está localizada?</label>  
+                                <div class="controls">  
+                                    <input name="q41_area_imovel" type="text" class="input-small" id="q41">   m2
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+                                <div class="controls">
+                                    <label class="radio inline" for="radio-0">
+                                        <input name="q41_tipo_medida" id="radios-0" value="1" type="radio">
+                                        Medida estimada pelo entrevistado
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q41_tipo_medida" id="radios-1" value="2" type="radio">
+                                        Medida verificada em escritura ou planta
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q41">Observaçoes</label>  
+                                <div class="controls">  
+                                    <textarea name="q41_observacao" class="input-xxlarge" id="q41" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="row span12">
+                                42. Qual o horário de funcionamento da GRTE?
+                                <div class="control-group span12">  
+                                    <div class="control-group span3">  
+                                        <label class="control-label" for="q42_inicio">Início</label>  
+                                        <div class="controls">  
+                                            <input name="q42_inicio" type="text" class="input-small" id="q42_inicio">
+                                        </div> 
+                                    </div>  
+
+                                    <div class="control-group span9">  
+                                        <label class="control-label" for="q42_encerramento">Encerramento</label>  
+                                        <div class="controls">  
+                                            <input name="q42_encerramento" type="text" class="input-small" id="q42_encerramento">
+                                        </div>  
+                                    </div>  
+                                </div> 
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q42">Observaoes</label>  
+                                <div class="controls">  
+                                    <textarea name="q42_observacao" class="input-xxlarge" id="q42" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="row span12">
+                                43. Quanto tempo faz que esta GRTE está aberta?
+
+                                <div class="control-group span12">  
+                                    <div class="control-group span3">  
+                                        <label class="control-label" for="q43_tempo_atividade_anos">Ano(s)</label>
+                                        <div class="controls">  
+                                            <input name="q43_tempo_atividade_anos" type="text" class="input-small" id="q43_tempo_atividade_anos">
+                                        </div>  
+                                    </div>  
+
+                                    <div class="control-group span9">  
+                                        <div class="controls">  
+                                            <label class="control-label" for="q43_tempo_atividade_meses">Mês(es)</label>
+                                            <input name="q43_tempo_atividade_meses" type="text" class="input-small" id="q43_tempo_atividade_meses">
+                                        </div>  
+                                    </div>  
+                                </div> 
+                            </div>
+
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q43">Observações</label>  
+                                <div class="controls">  
+                                    <textarea name="q43_observacao" class="input-xxlarge" id="q43" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                        </div>    
+                    </fieldset>
+                </form>
+            </div>
+
+            <div class="tab-pane fade in" id="grte-9">
+
+                <form name="bloco9" id="bloco9" class="form-horizontal">  
+                    <fieldset>  
+
+                        <legend>Bloco 9 - Instalações da GRTE</legend> 
+
+                        <div class="row-fluid">
+
+                            44. Observar instalações da GRTE (Não fazer a pergunta. Preencher sem a presença do(s) entrevistado(s))
+
+                            <br/><br/>
+
+                            <div class="control-group span12">
+                                44.1. Local oferece condições de segurança
+                                <div class="controls">
+                                    <label class="radio inline" for="radio-0">
+                                        <input name="q44_01_condicoes_seguranca" id="radios-0" value="1" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_01_condicoes_seguranca" id="radios-1" value="2" type="radio">
+                                        Não
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_01_condicoes_seguranca" id="radios-1" value="3" type="radio">
+                                        Em parte
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q44_01">Comentários</label>  
+                                <div class="controls">  
+                                    <textarea name="q44_01_comentario" class="input-xxlarge" id="q44_01" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+
+                            <div class="control-group span12">
+                                44.2. Local oferece facilidade de acesso (linhas de ônibus, metrô, outros)
+                                <div class="controls">
+                                    <label class="radio inline" for="radio-0">
+                                        <input name="q44_02_facilidade_acesso" id="radios-0" value="1" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_02_facilidade_acesso" id="radios-1" value="2" type="radio">
+                                        Não
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_02_facilidade_acesso" id="radios-1" value="3" type="radio">
+                                        Em parte
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q44_02">Comentários</label>  
+                                <div class="controls">  
+                                    <textarea name="q44_02_comentario" class="input-xxlarge" id="q44_02" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+                                44.3. Local espaçoso 
+                                <div class="controls">
+                                    <label class="radio inline" for="radio-0">
+                                        <input name="q44_03_local_espacoso" id="radios-0" value="1" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_03_local_espacoso" id="radios-1" value="2" type="radio">
+                                        Não
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_03_local_espacoso" id="radios-1" value="3" type="radio">
+                                        Em parte
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q44_03">Comentários</label>  
+                                <div class="controls">  
+                                    <textarea name="q44_03_comentario" class="input-xxlarge" id="q44_03" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+                                44.4. Local ventilado
+                                <div class="controls">
+                                    <label class="radio inline" for="radio-0">
+                                        <input name="q44_04_ventilado" id="radios-0" value="1" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_04_ventilado" id="radios-1" value="2" type="radio">
+                                        Não
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_04_ventilado" id="radios-1" value="3" type="radio">
+                                        Em parte
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q44_04">Comentários</label>  
+                                <div class="controls">  
+                                    <textarea name="q44_04_comentario" class="input-xxlarge" id="q44_04" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+                                44.5. Local bem iluminado
+                                <div class="controls">
+                                    <label class="radio inline" for="radio-0">
+                                        <input name="q44_05_local_iluminado" id="radios-0" value="1" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_05_local_iluminado" id="radios-1" value="2" type="radio">
+                                        Não
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_05_local_iluminado" id="radios-1" value="3" type="radio">
+                                        Em parte
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q44_05">Comentários</label>  
+                                <div class="controls">  
+                                    <textarea name="q44_05_comentario" class="input-xxlarge" id="q44_05" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+                                44.6. Local limpo
+                                <div class="controls">
+                                    <label class="radio inline" for="radio-0">
+                                        <input name="q44_06_local_limpo" id="radios-0" value="1" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_06_local_limpo" id="radios-1" value="2" type="radio">
+                                        Não
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_06_local_limpo" id="radios-1" value="3" type="radio">
+                                        Em parte
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q44_06">Comentários</label>  
+                                <div class="controls">  
+                                    <textarea name="q44_06_comentario" class="input-xxlarge" id="q44_06" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+                                44.7. Banheiros limpos e funcionando
+                                <div class="controls">
+                                    <label class="radio inline" for="radio-0">
+                                        <input name="q44_07_banheiro_limpo" id="radios-0" value="1" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_07_banheiro_limpo" id="radios-1" value="2" type="radio">
+                                        Não
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_07_banheiro_limpo" id="radios-1" value="3" type="radio">
+                                        Em parte
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q44_07">Comentários</label>  
+                                <div class="controls">  
+                                    <textarea name="q44_07_comentario" class="input-xxlarge" id="q44_07" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+                                44.8. Local de espera espaçoso
+                                <div class="controls">
+                                    <label class="radio inline" for="radio-0">
+                                        <input name="q44_08_local_espera_espacoso" id="radios-0" value="1" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_08_local_espera_espacoso" id="radios-1" value="2" type="radio">
+                                        Não
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_08_local_espera_espacoso" id="radios-1" value="3" type="radio">
+                                        Em parte
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q44_08">Comentários</label>  
+                                <div class="controls">  
+                                    <textarea name="q44_08_comentario" class="input-xxlarge" id="q44_08" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+                                44.9. Local de espera ventilado
+                                <div class="controls">
+                                    <label class="radio inline" for="radio-0">
+                                        <input name="q44_09_local_espera_ventilado" id="radios-0" value="1" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_09_local_espera_ventilado" id="radios-1" value="2" type="radio">
+                                        Não
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_09_local_espera_ventilado" id="radios-1" value="3" type="radio">
+                                        Em parte
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q44_09">Comentários</label>  
+                                <div class="controls">  
+                                    <textarea name="q44_09_comentario" class="input-xxlarge" id="q44_09" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+                                44.10. Local de espera iluminado
+                                <div class="controls">
+                                    <label class="radio inline" for="radio-0">
+                                        <input name="q44_10_local_espera_iluminado" id="radios-0" value="1" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_10_local_espera_iluminado" id="radios-1" value="2" type="radio">
+                                        Não
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_10_local_espera_iluminado" id="radios-1" value="3" type="radio">
+                                        Em parte
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q44_10">Comentários</label>  
+                                <div class="controls">  
+                                    <textarea name="q44_10_comentario" class="input-xxlarge" id="q44_10" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+                                44.11. Local de espera limpo
+                                <div class="controls">
+                                    <label class="radio inline" for="radio-0">
+                                        <input name="q44_11_local_espera_limpo" id="radios-0" value="1" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_11_local_espera_limpo" id="radios-1" value="2" type="radio">
+                                        Não
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_11_local_espera_limpo" id="radios-1" value="3" type="radio">
+                                        Em parte
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q44_11">Comentários</label>  
+                                <div class="controls">  
+                                    <textarea name="q44_11_comentario" class="input-xxlarge" id="q44_11" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+                                44.12. Local de espera com lugares para as pessoas esperarem sentadas
+                                <div class="controls">
+                                    <label class="radio inline" for="radio-0">
+                                        <input name="q44_12_local_espera_cadeiras" id="radios-0" value="1" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_12_local_espera_cadeiras" id="radios-1" value="2" type="radio">
+                                        Não
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_12_local_espera_cadeiras" id="radios-1" value="3" type="radio">
+                                        Em parte
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q44_12">Comentários</label>  
+                                <div class="controls">  
+                                    <textarea name="q44_12_comentario" class="input-xxlarge" id="q44_12" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+                                44.13. Local de espera com instalações para pessoas portadoras de necessidades especiais
+                                <div class="controls">
+                                    <label class="radio inline" for="radio-0">
+                                        <input name="q44_13_local_espera_necessidades_especiais" id="radios-0" value="1" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_13_local_espera_necessidades_especiais" id="radios-1" value="2" type="radio">
+                                        Não
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_13_local_espera_necessidades_especiais" id="radios-1" value="3" type="radio">
+                                        Em parte
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q44_13">Comentários</label>  
+                                <div class="controls">  
+                                    <textarea name="q44_13_comentario" class="input-xxlarge" id="q44_13" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            <div class="control-group span12">
+                                44.14. Local de espera com água e café para as pessoas
+                                <div class="controls">
+                                    <label class="radio inline" for="radio-0">
+                                        <input name="q44_14_local_agua_cafe" id="radios-0" value="1" type="radio">
+                                        Sim
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_14_local_agua_cafe" id="radios-1" value="2" type="radio">
+                                        Não
+                                    </label>
+                                    <label class="radio inline" for="radios-1">
+                                        <input name="q44_14_local_agua_cafe" id="radios-1" value="3" type="radio">
+                                        Em parte
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="control-group">  
+                                <label class="control-label" for="q44_14">Comentários</label>  
+                                <div class="controls">  
+                                    <textarea name="q44_14_comentario" class="input-xxlarge" id="q44_14" rows="3"></textarea>  
+                                </div>  
+                            </div>  
+
+                            
+                        </div>    
+                    </fieldset>
+                </form>
+            </div>
+            
+            <center><a class="btn btn-primary" id="salvar9" style="display:none;">Salvar</a> &nbsp;&nbsp;<a class="btn btn-primary" id="irParaOTopo">Ir para o topo</a></center>
+
+        </div>
+
+    </div>
+
+</div>
